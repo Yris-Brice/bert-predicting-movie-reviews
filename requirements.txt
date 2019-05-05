@@ -41,12 +41,12 @@ mock==3.0.4               # via tensorflow-estimator
 nanotime==0.5.2           # via dvc
 networkx==2.3             # via dvc
 numba==0.43.1             # via fastparquet
-numpy==1.16.3             # via fastparquet, h5py, keras-applications, keras-preprocessing, numba, pandas, scikit-learn, scipy, tensorboard, tensorflow-estimator, tensorflow-gpu
+numpy==1.16.3             # via fastparquet, h5py, keras-applications, keras-preprocessing, numba, pandas, scikit-learn, scipy, tensorboard, tensorflow-estimator, tensorflow-gpu, tensorflow-hub
 pandas==0.24.2
 pillow==6.0.0             # via asciimatics
 pip-tools==3.6.1
 ply==3.11                 # via dvc, jsonpath-rw
-protobuf==3.7.1           # via tensorboard, tensorflow-gpu
+protobuf==3.7.1           # via tensorboard, tensorflow-gpu, tensorflow-hub
 pyasn1==0.4.5             # via dvc
 pyfiglet==0.8.post1       # via asciimatics
 pyparsing==2.4.0          # via grandalf
@@ -57,12 +57,13 @@ requests==2.21.0          # via dvc
 schema==0.7.0             # via dvc
 scikit-learn==0.20.3      # via sklearn
 scipy==1.2.1              # via scikit-learn
-six==1.12.0               # via absl-py, bert-tensorflow, configobj, fastparquet, grpcio, h5py, jsonpath-rw, keras-preprocessing, mock, pip-tools, protobuf, python-dateutil, tensorboard, tensorflow-estimator, tensorflow-gpu, thrift
+six==1.12.0               # via absl-py, bert-tensorflow, configobj, fastparquet, grpcio, h5py, jsonpath-rw, keras-preprocessing, mock, pip-tools, protobuf, python-dateutil, tensorboard, tensorflow-estimator, tensorflow-gpu, tensorflow-hub, thrift
 sklearn==0.0
 smmap2==2.0.5             # via gitdb2
 tensorboard==1.13.1       # via tensorflow-gpu
 tensorflow-estimator==1.13.0  # via tensorflow-gpu
 tensorflow-gpu==1.13.1
+tensorflow-hub==0.4.0
 termcolor==1.1.0          # via tensorflow-gpu
 thrift==0.11.0            # via fastparquet
 toml==0.10.0              # via black

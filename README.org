@@ -29,3 +29,10 @@ python ./download_and_load_datasets.py
 3  I just finished reading a book about Dillinger...         1         0
 4  Greg Davis and Bryan Daly take some crazed sta...         2         0
 #+END_SRC
+** Preprocessing
+
+#+BEGIN_SRC python
+>>> import preprocessing
+>>> tokenizer = preprocessing.create_tokenizer_from_hub_module
+>>> train_features, test_features = preprocessing.create_train_test_features(tokenizer)
+#+END_SRC

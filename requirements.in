@@ -6,3 +6,4 @@ pandas
 pip-tools
 sklearn
 tensorflow-gpu
+tensorflow-hub
