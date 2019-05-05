@@ -1,0 +1,2 @@
+class FilePathFormatException(Exception):
+    pass

@@ -1,0 +1,8 @@
+bert-tensorflow
+black
+dvc
+fastparquet
+pandas
+pip-tools
+sklearn
+tensorflow-gpu
