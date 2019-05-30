@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ** Downloading train and test data
 
 #+BEGIN_SRC sh
-python ./download_and_load_datasets.py
+(env) ➜  bert-predicting-movie-reviews git:(master) python ./download_and_load_datasets.py
 #+END_SRC
 
 #+BEGIN_SRC python
@@ -31,8 +31,56 @@ python ./download_and_load_datasets.py
 #+END_SRC
 ** Preprocessing
 
+#+BEGIN_SRC sh
+(env) ➜  bert-predicting-movie-reviews git:(master) python preprocessing.py
+#+END_SRC
+
 #+BEGIN_SRC python
 >>> import preprocessing
->>> tokenizer = preprocessing.create_tokenizer_from_hub_module
->>> train_features, test_features = preprocessing.create_train_test_features(tokenizer)
+>>> tokenizer = preprocessing.create_tokenizer_from_hub_module()
+>>> print(tokenizer.tokenize("This here's an example of using the BERT tokenizer"))
+['this', 'here', "'", 's', 'an', 'example', 'of', 'using', 'the', 'bert', 'token', '##izer']
+>>> import pickle
+>>> train_features, test_features = (
+...     pickle.load(open(f"data/{mode}_features.pkl", "rb"))
+...     for mode in ["train", "test"]
+... )
+>>> len(train_features), len(test_features)
+(5000, 5000)
+>>> train_features[0].input_ids
+[101, 16357, 3854, 25487, 2015, 12124, 2003, 2019, 5186, 2204, 2143, 1012, 2129, 1005, 1055, 2008, 1029, 3854, 25487, 2038, 1037, 2200, 19551, 2126, 
+2000, 2425, 1037, 2466, 1010, 2012, 2560, 2002, 2106, 2031, 2007, 12124, 1012, 2000, 2033, 1996, 2878, 2143, 2001, 2066, 2019, 3325, 2130, 2065, 1045
+, 2106, 2156, 2009, 2006, 1037, 2235, 2547, 3898, 1012, 2130, 2007, 2035, 1996, 12225, 1010, 1999, 2026, 5448, 1010, 2023, 2143, 2003, 1996, 2087, 31
+43, 1010, 2613, 1998, 3048, 3538, 1997, 5988, 2059, 2087, 1997, 1996, 3152, 2006, 1996, 2327, 5539, 2862, 1012, 1045, 2036, 2228, 2009, 2003, 3383, 1
+996, 11228, 10458, 1010, 1996, 2087, 7788, 1998, 3143, 2143, 2105, 1012, 2035, 2157, 2045, 2024, 2060, 2204, 3924, 2205, 1010, 2021, 2023, 2028, 2003
+, 2026, 5440, 1012, 1996, 102]
+>>> train_features[0].label_id
+1
+>>> train_features[0].is_real_example
+True
+>>> train_features[0].input_mask
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+>>> train_features[0].segment_ids
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+#+END_SRC
+
+** Model
+
+#+BEGIN_SRC python
+>>> from defaults import BATCH_SIZE, LABEL_LIST, LEARNING_RATE, NUM_TRAIN_EPOCHS, WARMUP_PROPORTION
+>>> from model import model_fn_builder
+>>> num_warmup_steps = int(num_train_steps * WARMUP_PROPORTION)
+>>> num_warmup_steps = int(num_train_steps * WARMUP_PROPORTION)
+>>> model_fn = model_fn_builder(len(LABEL_LIST), LEARNING_RATE, num_train_steps, num_warmup_steps)
+#+END_SRC
+
+** Training
+
+#+BEGIN_SRC sh
+(env) ➜  bert-predicting-movie-reviews git:(master) ✗ BATCH_SIZE=16 python train.py
+Training took time  <Period [2019-05-31T08:55:19.991552+02:00 -> 2019-05-31T09:01:59.765379+02:00]>
 #+END_SRC

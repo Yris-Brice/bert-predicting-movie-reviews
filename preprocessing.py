@@ -1,3 +1,4 @@
+import pickle
 from typing import Tuple
 
 from bert import run_classifier, tokenization
@@ -9,6 +10,7 @@ import tensorflow_hub as hub
 from defaults import (
     BERT_MODEL_HUB,
     DATASET_NAMES,
+    LABEL_LIST,
     MAX_SEQ_LENGTH,
     SAMPLE_SIZE,
     data_filename,
@@ -17,7 +19,6 @@ from defaults import (
 
 DATA_COLUMN = "sentence"
 LABEL_COLUMN = "polarity"
-LABEL_LIST = [0, 1]
 
 
 def create_bert_input_example(row: pd.Series) -> run_classifier.InputExample:
@@ -65,8 +66,14 @@ def create_train_test_features(
 
 
 if __name__ == "__main__":
-    tf.logging.set_verbosity(tf.logging.INFO)
     tokenizer = create_tokenizer_from_hub_module()
-    print(tokenizer.tokenize("This here's an example of using the BERT tokenizer"))
-
-    create_train_test_features(tokenizer)
+    train_features, test_features = create_train_test_features(tokenizer)
+    train_features_file, test_features_file = (
+        open(data_filename(f"{mode}_features", serializer="pkl"), "wb")
+        for mode in ["train", "test"]
+    )
+    pickle.dump(train_features, train_features_file)
+    pickle.dump(test_features, test_features_file)
+    print(
+        "Stored train and test features files=", train_features_file, test_features_file
+    )

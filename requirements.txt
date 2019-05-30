@@ -43,6 +43,7 @@ networkx==2.3             # via dvc
 numba==0.43.1             # via fastparquet
 numpy==1.16.3             # via fastparquet, h5py, keras-applications, keras-preprocessing, numba, pandas, scikit-learn, scipy, tensorboard, tensorflow-estimator, tensorflow-gpu, tensorflow-hub
 pandas==0.24.2
+pendulum==2.0.4
 pillow==6.0.0             # via asciimatics
 pip-tools==3.6.1
 ply==3.11                 # via dvc, jsonpath-rw
@@ -50,8 +51,9 @@ protobuf==3.7.1           # via tensorboard, tensorflow-gpu, tensorflow-hub
 pyasn1==0.4.5             # via dvc
 pyfiglet==0.8.post1       # via asciimatics
 pyparsing==2.4.0          # via grandalf
-python-dateutil==2.8.0    # via pandas
+python-dateutil==2.8.0    # via pandas, pendulum
 pytz==2019.1              # via pandas
+pytzdata==2019.1          # via pendulum
 pyyaml==5.1               # via dvc
 requests==2.21.0          # via dvc
 schema==0.7.0             # via dvc
