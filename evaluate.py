@@ -18,7 +18,7 @@ def evaluate(model_dir: str = defaults.MODEL_DIR):
         drop_remainder=False,
     )
 
-    estimator = create_estimator(num_train_steps=int(5_000 / 16 * 3.0))
+    estimator = create_estimator()
     print(estimator.evaluate(input_fn=test_input_fn, steps=None))
 
 
