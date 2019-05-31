@@ -84,3 +84,10 @@ True
 (env) ➜  bert-predicting-movie-reviews git:(master) ✗ BATCH_SIZE=16 python train.py
 Training took time  <Period [2019-05-31T08:55:19.991552+02:00 -> 2019-05-31T09:01:59.765379+02:00]>
 #+END_SRC
+
+** Evaluation
+
+#+BEGIN_SRC sh
+(env) ➜  bert-predicting-movie-reviews git:(master) ✗ BATCH_SIZE=16 python evaluate.py
+{'auc': 0.85695416, 'eval_accuracy': 0.857, 'f1_score': 0.8551164, 'false_negatives': 366.0, 'false_positives': 349.0, 'loss': 0.6504969, 'precision': 0.8580724, 'recall': 0.85218096, 'true_negatives': 2175.0, 'true_positives': 2110.0, 'global_step': 937}
+#+END_SRC
