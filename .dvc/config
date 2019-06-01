@@ -1,0 +1,4 @@
+['remote "gs"']
+url = gs://hanfried-bert-predicting-movie-reviews-dvc
+[core]
+remote = gs

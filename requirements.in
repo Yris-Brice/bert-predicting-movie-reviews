@@ -1,6 +1,6 @@
 bert-tensorflow==1.0.1
 black==19.3b0
-dvc==0.35.7
+dvc[gs]==0.41.3
 fastparquet==0.3.1
 pandas==0.24.2
 pendulum==2.0.4
