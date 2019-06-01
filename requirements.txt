@@ -57,10 +57,9 @@ pytzdata==2019.1          # via pendulum
 pyyaml==5.1               # via dvc
 requests==2.21.0          # via dvc
 schema==0.7.0             # via dvc
-scikit-learn==0.20.3      # via sklearn
+scikit-learn==0.20.3
 scipy==1.2.1              # via scikit-learn
 six==1.12.0               # via absl-py, bert-tensorflow, configobj, fastparquet, grpcio, h5py, jsonpath-rw, keras-preprocessing, mock, pip-tools, protobuf, python-dateutil, tensorboard, tensorflow-estimator, tensorflow-gpu, tensorflow-hub, thrift
-sklearn==0.0
 smmap2==2.0.5             # via gitdb2
 tensorboard==1.13.1       # via tensorflow-gpu
 tensorflow-estimator==1.13.0  # via tensorflow-gpu
