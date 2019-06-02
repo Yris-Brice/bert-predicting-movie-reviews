@@ -11,7 +11,7 @@ DATASET_NAMES = ["train", "test"]
 FORCE_DOWNLOAD = bool(os.environ.get("FORCE_DOWNLOAD", False))
 LEARNING_RATE = float(os.environ.get("LEARNING_RATE", 2e-5))
 MAX_SEQ_LENGTH = int(os.environ.get("MAX_SEQ_LENGTH", 128))
-SAMPLE_SIZE = 5_000
+SAMPLE_SIZE = int(os.environ.get("SAMPLE_SIZE", 5_000))
 SEED: Union[int, np.random.RandomState] = int(os.environ.get("SEED", 42))
 
 LABEL_LIST = [0, 1]

@@ -1,0 +1,14 @@
+md5: 522c2db898f0adc4c6ba01299a3d4f02
+cmd: BATCH_SIZE=16 python evaluate.py -o evaluation.json
+wdir: .
+deps:
+- md5: 60e7bc3258c28ee9034cf3739acab168.dir
+  path: data
+- md5: e73f250967613b325e7da3a181a6b0e0.dir
+  path: model
+outs:
+- md5: fd49f34d3fb9b0725a4d0ba0c1540d3b
+  path: evaluation.json
+  cache: false
+  metric: true
+  persist: false

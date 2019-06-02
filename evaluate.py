@@ -1,12 +1,14 @@
+import json_tricks as json
 import pickle
 
 import bert
+import click
 
 import defaults
 from train import create_estimator
 
 
-def evaluate(model_dir: str = defaults.MODEL_DIR):
+def evaluate():
     test_features = pickle.load(
         open(defaults.data_filename("test_features", serializer="pkl"), "rb")
     )
@@ -19,8 +21,19 @@ def evaluate(model_dir: str = defaults.MODEL_DIR):
     )
 
     estimator = create_estimator()
-    print(estimator.evaluate(input_fn=test_input_fn, steps=None))
+    return estimator.evaluate(input_fn=test_input_fn, steps=None)
+
+
+@click.command()
+@click.option("-o", "--output-file", type=click.Path(writable=False))
+def cli(output_file):
+    evaluation = evaluate()
+    if output_file:
+        with open(output_file, "w") as f:
+            json.dump(evaluation, f, indent=4, sort_keys=True)
+
+    print(evaluation)
 
 
 if __name__ == "__main__":
-    evaluate()
+    cli()
