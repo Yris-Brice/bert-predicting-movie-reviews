@@ -10,5 +10,6 @@ outs:
 - md5: fd49f34d3fb9b0725a4d0ba0c1540d3b
   path: evaluation.json
   cache: false
-  metric: true
+  metric:
+    type: raw
   persist: false
